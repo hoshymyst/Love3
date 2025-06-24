@@ -2,41 +2,111 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Gatinho 💖</title>
+  <title>Gatinho Apaixonado 💖</title>
   <style>
     body {
-      background-color: #ffe6f0;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffd6e8, #ffe6f0);
+      font-family: 'Comic Sans MS', cursive;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      font-family: 'Comic Sans MS', cursive;
-      margin: 0;
+      overflow: hidden;
+      position: relative;
     }
 
     img {
-      width: 250px;
+      width: 200px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+      margin-bottom: 20px;
     }
 
     h1 {
-      color: #ff3399;
       font-size: 2.5em;
-      animation: pulse 1.5s infinite;
-      margin-top: 20px;
+      color: #ff1493;
+      text-shadow: 1px 1px white;
+      transition: all 0.4s ease;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); color: #ff66cc; }
-      100% { transform: scale(1); }
+    button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border: none;
+      background-color: #ff69b4;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px #d94f9e;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: #ff85c1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <img src="https://cataas.com/cat/says/Eu%20te%20amo?size=50&color=red" alt="Gatinho fofo dizendo eu te amo">
-  <h1>Eu te amo 💖</h1>
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Gatinho fofo">
+  <h1 id="message">Eu te amo 💖</h1>
+  <button onclick="nextMessage()">Mudar mensagem</button>
+
+  <script>
+    const messages = [
+      "Eu te amo 💖",
+      "Você é incrível 😻",
+      "Quero estar com você sempre 💘",
+      "Seu sorriso é meu sol 🌞",
+      "Você faz meu coração ronronar 😽"
+    ];
+    let index = 0;
+
+    function nextMessage() {
+      index = (index + 1) % messages.length;
+      document.getElementById('message').textContent = messages[index];
+    }
+
+    // Criar corações flutuantes
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
 </body>
 </html>
